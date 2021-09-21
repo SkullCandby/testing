@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX вместе с Flask</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script></head>
+<body>
+    <script>
+        function get_len() {
+            console.log(1);
+            $.ajax({
+                type: "POST",
+                url: "/",
+                data: $('form').serialize(),
+                success: function(response) {
+
+                    var json = jQuery.parseJSON(response)
+                    console.log(json)
+                    $('#len5').html(json.sm)
+                    $('#len5').html(6)
+                    $('#dd').html(json.dd.items())
+
+                    console.log(json.dd)
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+
+        }
+    </script>
+    <form action="/" method="post" name="form">
+        <input type="submit" value="CLICK" name="click" >
+    </form>
+    <form action="/" method="post" name="form">
+    <div id="len5">
+        <form action="/" method="post" name="form">
+        {% for x in range(0, len)%}
+                    <p>{{ sorter_lst[x][0] }} {{ sorter_lst[x][1] }} {{ sorter_lst[x][2] }}</p> <input type="submit" value="edit" name="edit">
+        {% endfor %}
+        </form>
+    </div>
+    <div id="dd"> </div>
+</body>
+</html>
